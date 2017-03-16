@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>隐贞Blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yinzhen.tech/"/>
+  <updated>2017-03-15T13:21:27.000Z</updated>
+  <id>http://yinzhen.tech/</id>
+  
+  <author>
+    <name>隐贞</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ReactiveSwift的中文翻译</title>
+    <link href="http://yinzhen.tech/2017/03/15/ReactiveSwift%E7%9A%84%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91/"/>
+    <id>http://yinzhen.tech/2017/03/15/ReactiveSwift的中文翻译/</id>
+    <published>2017-03-15T09:04:08.000Z</published>
+    <updated>2017-03-15T13:21:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="项目开源"><a href="#项目开源" class="headerlink" title="项目开源"></a>项目开源</h4><p>从学习编程以来，很羡慕为开源社区做工作的那些科技者。很多时候自己也想拥有开源项目，不过在编程遇到的问题很多都有完善的解决方案了，所以也不想在旧有的问题上再插上一脚~</p>
+<p>这次因为想要深入学习，所以看了关于『响应式编程』的概念，然后对<a href="http://reactivecocoa.io/reactiveswift/docs/latest/index.html" target="_blank" rel="external">ReactiveSwift</a>的框架产生了兴趣。虽然英文文档能看懂，不过本着如果有相关的详细中文介绍那就更好了。所以搜索了下中文方面的相关资料，这方面还是挺少的~所以趁此机会建了个<a href="https://github.com/YinZhenJob/ReactiveSwift_Chinese_Guide" target="_blank" rel="external">开源项目</a>，邀请好友一同来完成。不过，翻译这事对于技术类的要求也不低，很多专业术语是需要对应的，还有一些奇怪的用词。</p>
+<p>例如：<strong>stream of value over time</strong> , 这句话断的位置点不一样很奇怪的效果就会出现，概意是<em>随时间而变化的数据流</em> ，但是这么这样翻译就很变扭了，查找专业术语也没匹配上这句话的含义，所以有些词也得自己造了~于是想翻译成  <strong>泛时数据流</strong>，意思是<em>数据在时间里流动</em>。还是希望能够有同学能够帮忙校对下，毕竟这类文章真的需要<strong>正确</strong>。</p>
+<p>在此感谢小伙伴<strong>小侯</strong>帮忙负责<code>Signal</code>模块的翻译工作。小侯是一名还在上学的研究生，平常对技术也是十分热心，对周围人也真诚、关心。当我寻求周围朋友的帮助时，他毫不犹豫地奉献给了这个项目。</p>
+<p>当前我负责<code>序言</code>模块，尽量在每句话上都锱铢必较了。受于知识和能力的限制还有不少语不达意的地方，看到的朋友就告知下，在此感激不敬。</p>
+<h4 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h4><ul>
+<li>QQ:  493246157</li>
+<li>Email:  zohar_zeng@163.com</li>
+<li>Github: <a href="https://github.com/YinZhenJob/ReactiveSwift_Chinese_Guide" target="_blank" rel="external">https://github.com/YinZhenJob/ReactiveSwift_Chinese_Guide</a></li>
+</ul>
+<img src="/2017/03/15/ReactiveSwift的中文翻译/grass.jpg" alt="grass.jpg" title="">]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;项目开源&quot;&gt;&lt;a href=&quot;#项目开源&quot; class=&quot;headerlink&quot; title=&quot;项目开源&quot;&gt;&lt;/a&gt;项目开源&lt;/h4&gt;&lt;p&gt;从学习编程以来，很羡慕为开源社区做工作的那些科技者。很多时候自己也想拥有开源项目，不过在编程遇到的问题很多都有完善的解决方案
+    
+    </summary>
+    
+      <category term="技术栈" scheme="http://yinzhen.tech/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/"/>
+    
+    
+      <category term="文档" scheme="http://yinzhen.tech/tags/%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="Swift" scheme="http://yinzhen.tech/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Blog诞生日</title>
+    <link href="http://yinzhen.tech/2017/02/17/Blog%E8%AF%9E%E7%94%9F%E6%97%A5/"/>
+    <id>http://yinzhen.tech/2017/02/17/Blog诞生日/</id>
+    <published>2017-02-17T05:10:43.000Z</published>
+    <updated>2017-03-14T06:54:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>缘起</p>
+<p>自从小时候接触互联网，就一直希望拥有自己的个人主站。然而时间过去了那么久，曾经的愿望也忘得一干二净，忽然的前几天又萌生出建站的念头。于是乎，搜索教程、购买域名、搭建网站、部署服务，虽然作为新手有很多地方磕磕碰碰，但这也是Geek的乐趣之一吧~</p>
+<p>大学毕业之前一直都有写些文学相关的东西、心灵的笔录，在别人言语之间多以文艺青年形象自居。然而毕业之后，话语越来越少，逐渐沉默转而变成一个IT编程奋斗男。工作的压力是往常北漂人民所能感受到的，在要求自立自强自学的同时似乎每日的时间都被挤弄得一滴不剩。趁着在离职公司的这段时间好好自我省视，也把相关的技能补充加强，规划将来的方向。</p>
+<p>兴趣</p>
+<p>兴趣爱好之多，以至于我好像没有不感兴趣的。现在能做到保持有的兴趣主要有：科技、手工、烹饪、旅游、动漫、音乐、歌剧、文学、RPG，我几乎都想要在以上领域有所交叉接触。</p>
+<p>不过现在方向是往科技偏移，毕竟科技能够明显推动对社会的进步。虽然还不是领跑科技界的人，不过相关知识和经验的积累，对于我这种处于平凡的生活环境中的人是必不可少的过程。</p>
+<img src="/2017/02/17/Blog诞生日/little_time.jpg" alt="little_time.jpg" title="">
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;缘起&lt;/p&gt;
+&lt;p&gt;自从小时候接触互联网，就一直希望拥有自己的个人主站。然而时间过去了那么久，曾经的愿望也忘得一干二净，忽然的前几天又萌生出建站的念头。于是乎，搜索教程、购买域名、搭建网站、部署服务，虽然作为新手有很多地方磕磕碰碰，但这也是Geek的乐趣之一吧~&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="风雨日记" scheme="http://yinzhen.tech/categories/%E9%A3%8E%E9%9B%A8%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="毕业" scheme="http://yinzhen.tech/tags/%E6%AF%95%E4%B8%9A/"/>
+    
+      <category term="人生规划" scheme="http://yinzhen.tech/tags/%E4%BA%BA%E7%94%9F%E8%A7%84%E5%88%92/"/>
+    
+      <category term="兴趣" scheme="http://yinzhen.tech/tags/%E5%85%B4%E8%B6%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>都毕业了 秘密还是秘密</title>
+    <link href="http://yinzhen.tech/2015/06/28/%E9%83%BD%E6%AF%95%E4%B8%9A%E4%BA%86-%E7%A7%98%E5%AF%86%E8%BF%98%E6%98%AF%E7%A7%98%E5%AF%86/"/>
+    <id>http://yinzhen.tech/2015/06/28/都毕业了-秘密还是秘密/</id>
+    <published>2015-06-27T18:46:58.000Z</published>
+    <updated>2017-03-15T13:28:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>​    今晚夜是晴空，几日前的雾气散去。直至此刻，参加了许许多多的聚会，却始终没能和每一个见过的朋友说声“再见”。</p>
+<p>小部员发来张信哲的歌曲《信仰》，原先没心没肺的我现在也五味杂陈，而且夜晚的夜总是显得那么孤寂。说感谢的话俗可泛滥，而不言真是我浑身上下的歉意、遗憾和浑蛋。很多心底事累堆放在了珍珠贝里，用自己的胆汁、泪水包裹着，虽然日复一日逐渐圆润，没有当初刺痛自己的那种感觉，却将包裹的事物越积越深，越养越大，一个房间只留下一个小小的地方给自己，像秘密那样，挥不去，打不开。</p>
+<p>喜欢映衬不到眼瞳里存在的影子，<br>等待没有张开怀里微醺的温度，<br>靠近却又做出相反的步调，<br>秘密了，还是秘密。</p>
+<p>毕业，知不知足：<br>把记录烦恼的课本埋葬；<br>清空躺了多年的被窝；<br>捐赠淘来的折叠桌；<br>捐赠磕碰的滑板；<br>捐赠捡来的自行车；<br>藏好送别你的礼物；<br>剪去刚及肩膀的小马扎；<br>把一柜子的衣物折叠，寄回遥远的家；</p>
+<p>要出发了， 那些我告别和来不及告别的人；</p>
+<p>谢谢二楼西七号的炸酱面，三楼西的臊子面、朝鲜冷面和一号窗口的菜食，百来人的澡堂；<br>再见，我喜欢的你。</p>
+<img src="/2015/06/28/都毕业了-秘密还是秘密/faraway.jpg" alt="faraway.jpg" title="">]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;​    今晚夜是晴空，几日前的雾气散去。直至此刻，参加了许许多多的聚会，却始终没能和每一个见过的朋友说声“再见”。&lt;/p&gt;
+&lt;p&gt;小部员发来张信哲的歌曲《信仰》，原先没心没肺的我现在也五味杂陈，而且夜晚的夜总是显得那么孤寂。说感谢的话俗可泛滥，而不言真是我浑身上下的歉意、
+    
+    </summary>
+    
+    
+      <category term="青春" scheme="http://yinzhen.tech/tags/%E9%9D%92%E6%98%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三月的霾</title>
+    <link href="http://yinzhen.tech/2015/03/29/%E4%B8%89%E6%9C%88%E7%9A%84%E9%9C%BE/"/>
+    <id>http://yinzhen.tech/2015/03/29/三月的霾/</id>
+    <published>2015-03-29T12:30:33.000Z</published>
+    <updated>2017-03-15T13:30:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>三月底的天，灰霾霾的。远方翻滚的黄尘在天空之际往下弥漫，午后的暖日成了片状的白光。歇斯底里地来到拥挤的教室格局，三月的霾是一个粗暴的强盗。</p>
+<p> 昨日去参加“开源大会”，在大会上无意一瞥发现许久不见的“猴子”和“胖子”，在讶异和欣喜之时走了过去，不得不说一些因缘是解不开的结。当然我不知道是什么样的巧合会在另外一个城市遇到相熟的故人，走在城市的任何地方都不会遇到一样的你们。大学的日子对我来说已经是半剩不剩，常常有人感慨大学的时光是多麽美好，让人留恋不舍。也许我的大学活得不够拼劲，青春的张力没有把我带向理想的高堂，梦想不过成了我拿来糊弄别人感觉的“单纯”。</p>
+<p>每次一些事情失败之后，总想离开这已经熟悉再不能熟悉的环境，总以为离开重新开始才是最好的办法。烂摊子什么的自己不想要了，但是命运像根缚着身体的操线，我离不开控制我活动的这根线。于是，那些人和事都因为时间而合适地发生了。沉浸在自己的世界太久，是自己给自己造的牢笼。我从小就一直在寻找或制造有别与他人的奇特特点，总觉得独一无二的自己是世界上最珍贵的，也许由于这种想法造成了以后异样的行动和思维。当初熟不知道，一个独特的人在一个平衡的世界是那么格格不入，自己所想的世界只能自己一步步去造，许诺的理想越美好，要挣扎的世界也就越血淋漓。也不知是什么在召唤，最近在熟睡的时候总能感受着一些生命的流逝，感受万物的命运，感受别人从活到死的瞬息。人最无力的是千钧一发时抓不准时机，在力挽狂澜时手无缚鸡之力。受够了……三月的霾，是给自己的毒，最爱的是将自己沉醉在无奈的命运。</p>
+<p>从天白到天黑，路程遥遥，我不能阻止白天变黑夜，我更不能阻止自己在凌晨两点前就睡着 ，而只能早点起床，在要过去的一天里汲取能够让自己能够千钧一发、力挽狂澜时该有的本领。所以一个人走着，一个人吃饭，一个人在练习，不要问我为什么又是一个人，因为一个人最容易做到自己想做的事。我除了幻想，也该活得像要奋斗的人一样。霾留给其他人的毒</p>
+<img src="/2015/03/29/三月的霾/mai.jpeg" alt="mai.jpeg" title="">]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;三月底的天，灰霾霾的。远方翻滚的黄尘在天空之际往下弥漫，午后的暖日成了片状的白光。歇斯底里地来到拥挤的教室格局，三月的霾是一个粗暴的强盗。&lt;/p&gt;
+&lt;p&gt; 昨日去参加“开源大会”，在大会上无意一瞥发现许久不见的“猴子”和“胖子”，在讶异和欣喜之时走了过去，不得不说一些因缘是
+    
+    </summary>
+    
+      <category term="风雨日记" scheme="http://yinzhen.tech/categories/%E9%A3%8E%E9%9B%A8%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="霾" scheme="http://yinzhen.tech/tags/%E9%9C%BE/"/>
+    
+      <category term="迷茫" scheme="http://yinzhen.tech/tags/%E8%BF%B7%E8%8C%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>与考试无关的夜晚</title>
+    <link href="http://yinzhen.tech/2014/01/15/%E4%B8%8E%E8%80%83%E8%AF%95%E6%97%A0%E5%85%B3%E7%9A%84%E5%A4%9C%E6%99%9A/"/>
+    <id>http://yinzhen.tech/2014/01/15/与考试无关的夜晚/</id>
+    <published>2014-01-14T16:21:55.000Z</published>
+    <updated>2017-03-14T07:16:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>离别的风       憔悴的夜色<br>光秃秃的树干   时光捻过的颜容<br>走过的石板    没有留下的脚印</p>
+<p>路过的水果铺  逐渐散去的灯光<br>遇不上的人 奇怪的人<br>上链的门口 没有人的值班室<br>悄悄地  翻过篱笆 </p>
+<p>感冒的暖气  坚硬的绿花床<br>落下的玻璃杯 破碎的祝福<br>一些些的情绪 一些些的道理<br>讲给自己听  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;离别的风       憔悴的夜色&lt;br&gt;光秃秃的树干   时光捻过的颜容&lt;br&gt;走过的石板    没有留下的脚印&lt;/p&gt;
+&lt;p&gt;路过的水果铺  逐渐散去的灯光&lt;br&gt;遇不上的人 奇怪的人&lt;br&gt;上链的门口 没有人的值班室&lt;br&gt;悄悄地  翻过篱笆 &lt;/p&gt;
+&lt;p&gt;感冒的暖气
+    
+    </summary>
+    
+      <category term="如果可以酿成一首诗" scheme="http://yinzhen.tech/categories/%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E9%85%BF%E6%88%90%E4%B8%80%E9%A6%96%E8%AF%97/"/>
+    
+    
+      <category term="恋" scheme="http://yinzhen.tech/tags/%E6%81%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>风语消消黑人墓</title>
+    <link href="http://yinzhen.tech/2013/06/10/%E9%A3%8E%E8%AF%AD%E6%B6%88%E6%B6%88%E9%BB%91%E4%BA%BA%E5%A2%93/"/>
+    <id>http://yinzhen.tech/2013/06/10/风语消消黑人墓/</id>
+    <published>2013-06-10T09:27:42.000Z</published>
+    <updated>2017-03-14T07:20:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一些音乐静静的<br>像下着小雨那样<br>小到撑伞也不是，不撑也不是<br>就这样微妙着<br>一阵阵阴云下的凉风<br>今天是那么惬意地吹着<br>音乐像小雨，在这风动的天气一直下着<br>记录是种回忆，却来不及保存，消失不见</p>
+<p>也许，忘怀</p>
+<p>删掉如若是彻底的<br>是否已安然<br>再见如果是种可能，是否打个照面而过<br>歌颂也已停止，<br>心已坦荡，一种相识，不过半年<br>美好的不美好<br>忘掉忘不掉的<br>走去没走过的</p>
+<p>谢谢你 ，两季没闲过的日月</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一些音乐静静的&lt;br&gt;像下着小雨那样&lt;br&gt;小到撑伞也不是，不撑也不是&lt;br&gt;就这样微妙着&lt;br&gt;一阵阵阴云下的凉风&lt;br&gt;今天是那么惬意地吹着&lt;br&gt;音乐像小雨，在这风动的天气一直下着&lt;br&gt;记录是种回忆，却来不及保存，消失不见&lt;/p&gt;
+&lt;p&gt;也许，忘怀&lt;/p&gt;
+&lt;p&gt;删
+    
+    </summary>
+    
+      <category term="如果可以酿成一首诗" scheme="http://yinzhen.tech/categories/%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E9%85%BF%E6%88%90%E4%B8%80%E9%A6%96%E8%AF%97/"/>
+    
+    
+      <category term="寂寞" scheme="http://yinzhen.tech/tags/%E5%AF%82%E5%AF%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>今年的大四一条街</title>
+    <link href="http://yinzhen.tech/2013/06/03/%E4%BB%8A%E5%B9%B4%E7%9A%84%E5%A4%A7%E5%9B%9B%E4%B8%80%E6%9D%A1%E8%A1%97/"/>
+    <id>http://yinzhen.tech/2013/06/03/今年的大四一条街/</id>
+    <published>2013-06-03T14:09:10.000Z</published>
+    <updated>2017-03-15T13:35:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>学校大四一条街卖着些书，生活品，和配件类物品。也许是有点商人的资质，就打算去瞎逛着，砍砍价，当做是种乐趣。</p>
+<p>于是~</p>
+<p>昨天差点忽悠成功一哥们买个滑板陪我玩，今天我再次带上另外一人，打算买点专业书籍（学校订的书贵）类的，首家一帅哥，起价100元，我唠叨了大半天80底盘，我本着60元处理，帅哥委屈状 ：“你怎么不尊重一下市场规律，现在才摆摊没几天，你怎么能这样随随便便就砍价这么厉害，好歹也要过几天啊~（过几天这价就对不起我自己了）”。于是就作离开状~居然还真不肯往下掉价（好吧，我就先去其他家逛逛）；</p>
+<p>第二家一气质美女，起价130元（全新包括各种笔记和大四书籍），也唠叨了半天100元底盘，此刻见书不错本着80元处理的，再做离开状 ，唉~现在的学姐要求太高了，现在卖得那么贵到时候也得几毛钱论斤卖的份都有；</p>
+<p> 然后到了第三家我就说了，你看你隔壁那家帅哥卖给我80元我还嫌贵了，你们就不能往下降了么？然后学姐就说了：“我们都统一商量好了，一律卖130，你说的是隔壁那家么？（指了指）你看我都卖了好几套了，你看用我的书没错，又有笔记，书还很新，关键是我都有得奖学金，用了我的你也能一样的~（可是我能说之前那几家也是这么向我推销的么？）那我给你看看我的成绩单吧~”本着不甘心~，打算这几天都出来遛弯，看看有什么新的内容，转身呆在一旁思考状。那学姐就不讲究了，很不淡定地去到了隔壁摊那家帅哥店里，作教育状：“你怎么能这么不讲究呢？卖的书旧了点也就算了，转手几次也就算了，你还80元卖出去，有你这样的么！（学姐教育的是啊~）”接着：“我们不是都说好统一卖130元的么！（晕，这么回事啊）”你们这样也不尊重市场规律啊！而且是垄断价格的啊！好吧，我还是过几天再出来瞧瞧了。</p>
+<p>回想一下去年，路见一大妈走到一学姐前买蚊帐，问几元，学姐伸出了五个手指头！大妈果断往摊上扔下五毛钱飞快的跑了，留下凌乱的学姐。然后再发生什么有趣的事呢，后载吧。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学校大四一条街卖着些书，生活品，和配件类物品。也许是有点商人的资质，就打算去瞎逛着，砍砍价，当做是种乐趣。&lt;/p&gt;
+&lt;p&gt;于是~&lt;/p&gt;
+&lt;p&gt;昨天差点忽悠成功一哥们买个滑板陪我玩，今天我再次带上另外一人，打算买点专业书籍（学校订的书贵）类的，首家一帅哥，起价100元，我唠
+    
+    </summary>
+    
+      <category term="风雨日记" scheme="http://yinzhen.tech/categories/%E9%A3%8E%E9%9B%A8%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>遥想蚊子当年</title>
+    <link href="http://yinzhen.tech/2013/05/18/%E9%81%A5%E6%83%B3%E8%9A%8A%E5%AD%90%E5%BD%93%E5%B9%B4/"/>
+    <id>http://yinzhen.tech/2013/05/18/遥想蚊子当年/</id>
+    <published>2013-05-18T02:52:39.000Z</published>
+    <updated>2017-03-15T13:37:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近老家那边貌似温度挺高的，各色昆虫貌似要开个全国协商会议。</p>
+<p>回想当初我还在家时，蚊音袅袅，它们用特殊的节奏带领整个夜色进入一个高度兴奋的迪斯科，而且舞姿还真是多种多样：</p>
+<ul>
+<li>有的像飞机一样缓慢滑翔，一般不发出声音，不过低空的很容易就被我给坠机了；</li>
+<li>有的像个震荡的伤残酒鬼上下地飞，这种姿势给你带来的声音是爬到半山腰然后滚下来的“嘤（上声）~~嘤（下声）的交织循环，这时可以用扇子、书本等风力输出大的物体往它方向打过去，一般可以纠正它的轨迹使它趋于一个平缓的曲线，这时就可以用如来神掌了。不过也有的是心理素质不太好的，就会变得踉跄的，这时它就会找到一个地方歇歇脚，跟上它，看看去了哪里。</li>
+<li>有的还像回旋的螺线，真怀疑是个杂技演员，不然就是小脑只剩下一半，发出的声音就和多普勒效应一样，应用的方法同二。</li>
+</ul>
+<p>那些年，蚊子是相对健康地喝着饮料的，不像现在我们自己污染了自己，也要去迫害蚊兄；</p>
+<p>那些年，我常常在两点睡觉，因为有了蚊兄的陪伴，我可以活络筋骨，不至于半夜无趣还去想些奇怪的数学问题，直接就是生物+物理+化学的综合复习，还有体育锻炼；</p>
+<p>那些年，是蚊兄教会了我，一个人的奋斗是很艰苦滴！所以你得有效地解决一些生活问题，像是该不该挂个蚊帐给自己一堵墙保护自己，该不该用”雷达或是菊花“等奇效去伤害蚊兄也伤害自己，还有家里养的植物要选用什么样的；</p>
+<p>那些年，蚊兄让我知道了被吻的感觉，我只能说，单位面积造成伤害和欲望有关。当我觉察出感觉时，这丫的饿昏了，一点不懂温柔，所以对待不温柔的人只好和它say good bye了。</p>
+<p>其实蚊兄，我见过的有四种：</p>
+<ul>
+<li>一种个大无花纹，它是憨厚老实型的；</li>
+<li>一种是个小无花纹，它是有点温柔的；</li>
+<li>一种是个小带花纹的，不但花心而且它是一点都不温柔的，事后那个小包很久消散，也奇痒；</li>
+<li>还有一种是公蚊子，它是绿色的，一直垂涎我家植物好久了。</li>
+</ul>
+<p>温度有点高了，风也很歇斯底里地吹着， 尽管安装了窗网，不过貌似阻隔不了蚊子这种激进份子。所以，到晚上，一个人睡的时候还真是苦不堪言，好在大学让我体验了一把”我为人人，人人为我“的光荣传统。</p>
+<p>呵呵，写得有点长了，还有什么方法呵护蚊兄的请补充吧。<br>ps：早上一定要吃早餐啊~，饿昏了，神志不清的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近老家那边貌似温度挺高的，各色昆虫貌似要开个全国协商会议。&lt;/p&gt;
+&lt;p&gt;回想当初我还在家时，蚊音袅袅，它们用特殊的节奏带领整个夜色进入一个高度兴奋的迪斯科，而且舞姿还真是多种多样：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有的像飞机一样缓慢滑翔，一般不发出声音，不过低空的很容易就被我
+    
+    </summary>
+    
+    
+      <category term="蚊子" scheme="http://yinzhen.tech/tags/%E8%9A%8A%E5%AD%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>远古</title>
+    <link href="http://yinzhen.tech/2011/06/26/%E8%BF%9C%E5%8F%A4/"/>
+    <id>http://yinzhen.tech/2011/06/26/远古/</id>
+    <published>2011-06-26T15:25:51.000Z</published>
+    <updated>2017-03-14T07:33:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>远古的时候，</p>
+<p>是否曾经有过我，相约一物</p>
+<p>一起到老</p>
+<p>一起死去</p>
+<p>远古的时候，</p>
+<p>是否存在过我，也是否存在过你</p>
+<p>相约永世</p>
+<p>寻找彼此</p>
+<p>相见一次</p>
+<p>也许生生世世，世世生生</p>
+<p>我们都没再次相遇</p>
+<p>转入轮回</p>
+<p>你我是否还会记得寻找彼此？</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;远古的时候，&lt;/p&gt;
+&lt;p&gt;是否曾经有过我，相约一物&lt;/p&gt;
+&lt;p&gt;一起到老&lt;/p&gt;
+&lt;p&gt;一起死去&lt;/p&gt;
+&lt;p&gt;远古的时候，&lt;/p&gt;
+&lt;p&gt;是否存在过我，也是否存在过你&lt;/p&gt;
+&lt;p&gt;相约永世&lt;/p&gt;
+&lt;p&gt;寻找彼此&lt;/p&gt;
+&lt;p&gt;相见一次&lt;/p&gt;
+&lt;p&gt;也许生生世世，
+    
+    </summary>
+    
+      <category term="如果可以酿成一首诗" scheme="http://yinzhen.tech/categories/%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E9%85%BF%E6%88%90%E4%B8%80%E9%A6%96%E8%AF%97/"/>
+    
+    
+      <category term="恋" scheme="http://yinzhen.tech/tags/%E6%81%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>蓬莱</title>
+    <link href="http://yinzhen.tech/2009/05/28/%E8%93%AC%E8%8E%B1/"/>
+    <id>http://yinzhen.tech/2009/05/28/蓬莱/</id>
+    <published>2009-05-28T10:08:04.000Z</published>
+    <updated>2017-03-14T07:36:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>海滩的那一边</strong>，一叶扁舟在荡漾<br>星光点烁，风平浪静<br>又一轮月亮翘起了夜的眉梢</p>
+<p><strong>海滩的那一边</strong>，一阵铃声在飘舞<br>没有了世人的喧嚣，没有了尘世的火燥<br>一阵风吹起了雾帘<br>从此再见了我的学校，班级，分数</p>
+<p>像梦一般，不曾有过，又曾相识地<br>—-我的小岛<strong>远离，远离</strong>……</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;海滩的那一边&lt;/strong&gt;，一叶扁舟在荡漾&lt;br&gt;星光点烁，风平浪静&lt;br&gt;又一轮月亮翘起了夜的眉梢&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;海滩的那一边&lt;/strong&gt;，一阵铃声在飘舞&lt;br&gt;没有了世人的喧嚣，没有了尘世的火燥&lt;br&gt;一阵风吹起了雾帘&lt;br&gt;从
+    
+    </summary>
+    
+      <category term="如果可以酿成一首诗" scheme="http://yinzhen.tech/categories/%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E9%85%BF%E6%88%90%E4%B8%80%E9%A6%96%E8%AF%97/"/>
+    
+    
+      <category term="逃离" scheme="http://yinzhen.tech/tags/%E9%80%83%E7%A6%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>朦胧</title>
+    <link href="http://yinzhen.tech/2009/01/18/%E6%9C%A6%E8%83%A7/"/>
+    <id>http://yinzhen.tech/2009/01/18/朦胧/</id>
+    <published>2009-01-17T16:20:24.000Z</published>
+    <updated>2017-03-14T07:38:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果是你，它会飞起来，</p>
+<p>像在有雾的微风中轻轻地摆动，摇摆</p>
+<p>如果是风，他会等待，</p>
+<p>在一个优美的山谷里轻轻把你托起，照顾</p>
+<p>没有雾的季节，世界却变得如此朦胧</p>
+<p>像月光在榆荫下的那潭湖水中翘起轻微的面容</p>
+<p>我是你，在月儿的小角上垂下真实的悲伤</p>
+<p>还会等待 还会努力</p>
+<p>————-回家</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果是你，它会飞起来，&lt;/p&gt;
+&lt;p&gt;像在有雾的微风中轻轻地摆动，摇摆&lt;/p&gt;
+&lt;p&gt;如果是风，他会等待，&lt;/p&gt;
+&lt;p&gt;在一个优美的山谷里轻轻把你托起，照顾&lt;/p&gt;
+&lt;p&gt;没有雾的季节，世界却变得如此朦胧&lt;/p&gt;
+&lt;p&gt;像月光在榆荫下的那潭湖水中翘起轻微的面容&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="如果可以酿成一首诗" scheme="http://yinzhen.tech/categories/%E5%A6%82%E6%9E%9C%E5%8F%AF%E4%BB%A5%E9%85%BF%E6%88%90%E4%B8%80%E9%A6%96%E8%AF%97/"/>
+    
+    
+      <category term="恋" scheme="http://yinzhen.tech/tags/%E6%81%8B/"/>
+    
+  </entry>
+  
+</feed>
