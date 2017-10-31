@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yinzhen.tech/"/>
-  <updated>2017-03-15T13:21:27.000Z</updated>
+  <updated>2017-10-17T03:32:05.080Z</updated>
   <id>http://yinzhen.tech/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS制作依赖Cocoapods且OC与Swift混编的framework</title>
+    <link href="http://yinzhen.tech/2017/10/06/iOS%E5%88%B6%E4%BD%9C%E4%BE%9D%E8%B5%96Cocoapods%E4%BE%9D%E8%B5%96-OC%E4%B8%8ESwift%E6%B7%B7%E7%BC%96%E7%9A%84framework/"/>
+    <id>http://yinzhen.tech/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/</id>
+    <published>2017-10-06T04:46:26.000Z</published>
+    <updated>2017-10-17T03:32:05.080Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h4><p>刚进公司，翻看以前的工程项目，项目没有按照一定的组织计划和标准进行构建。并且，直接在项目上进行重构会有很大的<strong>阻力</strong>和<strong>风险</strong>。领导层也知道相关问题的存在，如果项目还是以现在的方式继续进行代码堆叠，势必将来会更加难以接手和维护，所以重新进行两个工程项目的重写得到支持。</p>
+<h4 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h4><p>虽然已经确定对两个项目进行重写，但是业务方面也停下来是挺<strong>危险</strong>的一件事情，毕竟我们是因为架构的优化而重新写了一遍。我原计划的是，自己先编写基础公共的模块，其他两位开发人员继续业务代码上的开发。等到我这边工作完成的时候，他们可以很快切入进来，并且也不耽误现有的需求计划。不过鉴于领导层的鼎力支持，好吧~项目的优化成为了当前工作的重中之重，然后自己作为实践人，肩上也少不了压力。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>因为两个项目只是同一款应用做 iPhone 和 iPad 版的区分，业务大体上相同。所以萌生了制作基础公共库的想法。然后两个版本分别依赖这个基础库，就可以免了相关模块的重复开发和维护。又鉴于该库还依赖于一些三方的支持，所以在此基础上添加了Cocoapods的依赖包管理。当时设计的方案是：framework、 一样作为独立的project添加到 workspace 中去，不过由于多个工程之间的版本管理方案没有达到合理的程度，所以作罢。</p>
+<blockquote>
+<p>合理的版本管理方案：</p>
+<p>要求：每个工程之间应该是独立的；</p>
+<p>问题：</p>
+<ul>
+<li>通常我们是在每个工程目录的文件夹下为创建 Git 管理，正常的逻辑是一个workspace包含 framework、iPhone、iPad、cocoapods，然后每个 project 都包含一个git管理，所以我们应不应该为了workspace这个总目录来创建一个新的git仓库？亦或者将workspace这个工作台放在其中的某个project中？</li>
+<li>如果创建一个版本控制去单独维护 workspace 的话，那么此刻这个git仓库将会包含所有 project 项目上的改动，将会重复。</li>
+<li>如果只配置一个总git仓库，那么其它 project 不免失去了独立性的意义。</li>
+</ul>
+</blockquote>
+<p>也因为创建不同 project 没能协调好 cocoapods 引入导致的一些问题，所以采取了另外一种方案，那就是创建多个target而不是project，这样保持了一个project意义的完整性。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h5 id="公司切换到-swift-的开发洪流当中，首先我们新创一个-swift-语言的-project：因为是制作-framework-为目的，所以选择iOS平台下的Cocoa-Touch-Framework-框架-然后依次填写工程的相关信息，最后生成该project。"><a href="#公司切换到-swift-的开发洪流当中，首先我们新创一个-swift-语言的-project：因为是制作-framework-为目的，所以选择iOS平台下的Cocoa-Touch-Framework-框架-然后依次填写工程的相关信息，最后生成该project。" class="headerlink" title="公司切换到 swift 的开发洪流当中，首先我们新创一个 swift 语言的 project：因为是制作 framework 为目的，所以选择iOS平台下的Cocoa Touch Framework 框架,然后依次填写工程的相关信息，最后生成该project。"></a>公司切换到 swift 的开发洪流当中，首先我们新创一个 swift 语言的 project：因为是制作 framework 为目的，所以选择iOS平台下的<code>Cocoa Touch Framework</code> 框架,然后依次填写工程的相关信息，最后生成该project。</h5><img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/01_new_project.png" alt="创建新工程" title="创建新工程">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/02_choose_framework.png" alt="选择生成的框架，在此选择framework" title="选择生成的框架，在此选择framework">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/03_framework_next.png" alt="填写相关框架信息" title="填写相关框架信息">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/04_framework_finsh.png" alt="生成项目完成，选择支持的最低版本" title="生成项目完成，选择支持的最低版本">
+<h5 id="创建新的-Target-——-iPhone-和-iPad，并为其添加本地创建的依赖库支持；"><a href="#创建新的-Target-——-iPhone-和-iPad，并为其添加本地创建的依赖库支持；" class="headerlink" title="创建新的 Target —— iPhone 和 iPad，并为其添加本地创建的依赖库支持；"></a>创建新的 Target —— iPhone 和 iPad，并为其添加本地创建的依赖库支持；</h5><img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/01_new_target.png" alt="创建新的Target：iPhone 和 iPad" title="创建新的Target：iPhone 和 iPad">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/02_target_view.png" alt="选择生成的框架，在此选择视图" title="选择生成的框架，在此选择视图">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/03_target_next.png" alt="框架信息填写" title="框架信息填写">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/04_target_creat.png" alt="框架生成完成" title="框架生成完成">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/05_target_config.jpg" alt="配置target相关信息" title="配置target相关信息">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/06_embedded_add.jpg" alt="为target添加本地依赖库，选择 Embedded Binaries 添加" title="为target添加本地依赖库，选择 Embedded Binaries 添加">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/07_embedded_finsh.png" alt="注意下边的 Linked framework and Libraries 也自动添加和上面保持一致" title="注意下边的 Linked framework and Libraries 也自动添加和上面保持一致">
+<h5 id="最后为工程配置cocoapods：终端进入project目录，键入pod-init来生成-podfile-文件，打开-podfile-文件输入自己需要的依赖库，因为标题是OC与Swift-混编，所以也引入两个不同的开发语言，看出现什么意外的效果；"><a href="#最后为工程配置cocoapods：终端进入project目录，键入pod-init来生成-podfile-文件，打开-podfile-文件输入自己需要的依赖库，因为标题是OC与Swift-混编，所以也引入两个不同的开发语言，看出现什么意外的效果；" class="headerlink" title="最后为工程配置cocoapods：终端进入project目录，键入pod init来生成 podfile 文件，打开 podfile 文件输入自己需要的依赖库，因为标题是OC与Swift 混编，所以也引入两个不同的开发语言，看出现什么意外的效果；"></a>最后为工程配置cocoapods：终端进入project目录，键入<code>pod init</code>来生成 <strong>podfile</strong> 文件，打开 podfile 文件输入自己需要的依赖库，因为标题是OC与Swift 混编，所以也引入两个不同的开发语言，看出现什么意外的效果；</h5><img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/01_pod_init.png" alt="创建podfile文件" title="创建podfile文件">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/02_pod_edit.png" alt="编写podfile文件信息" title="编写podfile文件信息">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/03_pod_install.png" alt="cocoapods安装" title="cocoapods安装">
+<h5 id="配置好-Cocoapods-之后-我们来为自己创建的-frame-添加相关的代码吧。首先打开工程的-workspace，在-自己创建的-framework-中创建-OC-类，然后编写相应的实例方法，并在工程的头文件中导入需要暴露给其它-targetd的OC头文件（swift文件可以忽略这步），最后对该framework进行编译，在你需要的-target-中导入-framework-即可使用。"><a href="#配置好-Cocoapods-之后-我们来为自己创建的-frame-添加相关的代码吧。首先打开工程的-workspace，在-自己创建的-framework-中创建-OC-类，然后编写相应的实例方法，并在工程的头文件中导入需要暴露给其它-targetd的OC头文件（swift文件可以忽略这步），最后对该framework进行编译，在你需要的-target-中导入-framework-即可使用。" class="headerlink" title="配置好 Cocoapods 之后,我们来为自己创建的 frame 添加相关的代码吧。首先打开工程的 workspace，在 自己创建的 framework 中创建 OC 类，然后编写相应的实例方法，并在工程的头文件中导入需要暴露给其它 targetd的OC头文件（swift文件可以忽略这步），最后对该framework进行编译，在你需要的 target 中导入 framework 即可使用。"></a>配置好 Cocoapods 之后,我们来为自己创建的 frame 添加相关的代码吧。首先打开工程的 workspace，在 自己创建的 framework 中创建 OC 类，然后编写相应的实例方法，并在工程的头文件中导入需要暴露给其它 targetd的OC头文件（swift文件可以忽略这步），最后对该framework进行编译，在你需要的 target 中导入 framework 即可使用。</h5>
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/01_network_new.png" alt="为framework添加代码" title="为framework添加代码">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/02_network_init.png" alt="创建名为Network的OC类" title="创建名为Network的OC类">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/03_network_add.png" alt="给Network添加实例方法" title="给Network添加实例方法">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/04_network_edit.png" alt="引入AFN依赖包，编写实例方法的实现" title="引入AFN依赖包，编写实例方法的实现">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/05_network_publish.png" alt="将Network类暴露给其它target" title="将Network类暴露给其它target">
+<img src="/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/01_project_invoke.png" alt="在iPhone target中引入cocoapods和自己编写的库，并调用方法" title="在iPhone target中引入cocoapods和自己编写的库，并调用方法">
+<h4 id="很多坑"><a href="#很多坑" class="headerlink" title="很多坑"></a>很多坑</h4><p>也许你以为跟着这些步骤就好了，其实还有不少坑。</p>
+<p>比如你在 framework 中写OC与swift混编的东西，就得多注意这两者语言的特性了。</p>
+<ol>
+<li>OC 调用 swift 的属性：你得将 swift 中的属性用 <code>@objc</code> 声明为对象，并且赋予 open 权限；</li>
+<li>关于 swift4.0 的 json 转换对象特性： Codable协议，如果你是打算在 OC 中直接使用 swift 的 Json 编解码特性的话，找到了方法一定要告诉我。我查了下关于这部分的内容，OC语言并没有这方面的文档资料，所以它们之间并不互相直接支持，你得编写个 swift 模型的编解码包装，然后暴露给 OC 使用；</li>
+<li>很多 swift 过于强大的新特性，你不能在 OC 中使用 enum、struct 中的方法、协议，不能使用<strong>元组</strong>  等等。</li>
+</ol>
+<p>初次编写技术文，如果写的不对就是误人子弟了。所以有遇到问题、纠正或建议的希望能和我联系，不胜感激。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h4&gt;&lt;p&gt;刚进公司，翻看以前的工程项目，项目没有按照一定的组织计划和标准进行构建。并且，直接在项目上进行重构会有很大的&lt;strong&gt;阻力&lt;/stro
+    
+    </summary>
+    
+      <category term="技术栈" scheme="http://yinzhen.tech/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/"/>
+    
+    
+      <category term="文档" scheme="http://yinzhen.tech/tags/%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="Swift" scheme="http://yinzhen.tech/tags/Swift/"/>
+    
+  </entry>
   
   <entry>
     <title>ReactiveSwift的中文翻译</title>
