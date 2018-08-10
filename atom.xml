@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yinzhen.tech/"/>
-  <updated>2017-10-17T03:32:05.080Z</updated>
+  <updated>2018-08-10T08:56:08.591Z</updated>
   <id>http://yinzhen.tech/</id>
   
   <author>
@@ -16,11 +16,136 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>iOS 正确嵌套 WKWebView 的 TableView 方式之一</title>
+    <link href="http://yinzhen.tech/2018/08/07/iOS-%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E5%AF%8C%E6%96%87%E6%9C%AC/"/>
+    <id>http://yinzhen.tech/2018/08/07/iOS-中的那些富文本/</id>
+    <published>2018-08-07T06:53:19.000Z</published>
+    <updated>2018-08-10T08:56:08.591Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>此文读者：iOS 开发者</li>
+<li>此文深度：粗浅</li>
+<li>此文目的：解决 TableView 嵌套 WKWebView 高度问题</li>
+<li>环境配置：Xcode10.0  &amp;  macOS10.13.6  &amp;   弱网环境</li>
+</ul>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>项目做多了，难免会有些需要和富文本打交道地方。展示一个富文本可以使用多种技术方案，不过多个方案之间各有自己的特性，这就需要开发人员进行技术的筛选。因本司编辑员常用网页样式，故而一些长篇的图文当中就需要 WebView 作为容器进行展示了。</p>
+<p>如果展示是单纯的H5介绍页，使用一个纯 WebView 进行展示是非常合适的。不过当展示界面混合了 Native 控件，事情就变得不太容易起来。通常这样的页面同新闻的详情页一样，一个 TableView 中嵌套了包含 WebView 的 Cell 或 TableHeaderView，且要求整个 TableView 滑动起来自然 &amp; 连贯。</p>
+<ul>
+<li>连贯，即要求 TableView 整体内容不能有截断，所以 TableView 中的各个部分要求自适应其高度；</li>
+<li>自然，即要求 TableView 在滑动的时候内容随着操作手势明确地上下滚动 不能出现掉帧、卡顿现象，所以 耗时操作 &amp;  响应事件 就需要格外关注；</li>
+<li>轻巧，即要求 实现方式较为简便，便于其他开发者的维护；</li>
+</ul>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>我们需要创建一个类似新闻详情页的<a href="">Demo</a>：</p>
+<ul>
+<li>主页头部展示 HTML ，宽度与屏幕宽度一致，高度随内容需要完全展开；</li>
+<li>尾部是推荐文章的单元，点击该单元可以切换头部的内容，就像下图一样。</li>
+</ul>
+<img src="/2018/08/07/iOS-中的那些富文本/detail.png" alt="主页面" title="主页面">
+<p>其详情页的层级如下：（已上传到GitHub，为了便于方案演变，本人随开发做了 commit 记录，读者可根据个人需求在各个 commit 版本中切换）</p>
+<ul>
+<li>TableView<ul>
+<li>WebCell：用于 HTML 展示；</li>
+<li>SectionCell：用于 模块标题 展示；</li>
+<li>ArticleCell：用于 推荐单元 展示；</li>
+</ul>
+</li>
+<li>ToolView<ul>
+<li>手势点击事件</li>
+</ul>
+</li>
+</ul>
+<h4 id="基础版："><a href="#基础版：" class="headerlink" title="基础版："></a>基础版：</h4><blockquote>
+<p>类型：纯文本        </p>
+<p>参考：《人间失格》单元</p>
+</blockquote>
+<p>详情页展示的是纯文本，我们仅需在 WebViw 代理<code>webView(_, didFinish)</code>方法通过执行<code>document.body.scrollHeight</code>  JS代码注入获取文档高度，再将高度反馈给 TableView 进行刷新即可，该高度即为文档渲染的正确高度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) &#123;</div><div class="line">    	// 获取 HTML 文档高度</div><div class="line">        webView.evaluateJavaScript(&quot;document.body.scrollHeight&quot;) &#123; (heightValue, error) in</div><div class="line">            guard let height = heightValue as? CGFloat else &#123; return &#125;</div><div class="line">            self.heightAction?(height) </div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请参考<a href="">Demo</a>中「基础版」commit 节点。</p>
+<h4 id="观察者模式："><a href="#观察者模式：" class="headerlink" title="观察者模式："></a>观察者模式：</h4><blockquote>
+<p>类型：少量图文混排    </p>
+<p>参考：《迟暮》单元</p>
+</blockquote>
+<p>当详情页展示的是少量的图文混排后，因为图片的加载是一件耗时操作的事情，我们通常将其设定为懒加载模式，当页面内的资源加载完毕后我们再获取其高度，才为正确的文档高度。所以在<code>webView(_, didFinish)</code>里获取其高度也不是准确的，该代理方法是 WebView 载入 HTML 文档完成后的回调，并不等于该 HTML 完全渲染完后的回调。</p>
+<ol>
+<li><h5 id="contentSize-方法"><a href="#contentSize-方法" class="headerlink" title="contentSize 方法"></a>contentSize 方法</h5></li>
+</ol>
+<p>根据以上判断，我们需要捕捉 HTML 渲染变化的信号。而 HTML 渲染动作直接影响到的是 WebView  <code>scrollView.contentSize</code> 属性，每当该值发生变化代表的是当前 HTML文档 已渲染到的位置。</p>
+<p>我们可以使用<strong>观察者模式</strong>来监听这个属性的变化，当该属性发生变化时我们需要及时调整容器的高度并将其反映给 TableView 进行刷新。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">fileprivate lazy var webView: WKWebView = &#123;</div><div class="line">        let config = WKWebViewConfiguration()</div><div class="line">        let web    = WKWebView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: 100), configuration: config)</div><div class="line">        web.navigationDelegate = self</div><div class="line">        web.scrollView.isScrollEnabled = false</div><div class="line">        web.translatesAutoresizingMaskIntoConstraints = false</div><div class="line">        // 添加观察者监听 scrollView.contentSize 属性</div><div class="line">        web.addObserver(self, forKeyPath: &quot;scrollView.contentSize&quot;, options: .new, context: nil)</div><div class="line">        return web</div><div class="line">&#125;()</div><div class="line">    </div><div class="line">/// 监听 scrollView.contentSize 属性</div><div class="line">override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) &#123;</div><div class="line">        if keyPath == &quot;scrollView.contentSize&quot;, let newSize = change?[.newKey] as? CGSize 			&#123;</div><div class="line">            print(&quot;new size: \(newSize)&quot;)</div><div class="line">            self.heightAction?(newSize.height)</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">deinit &#123;</div><div class="line">        webView.stopLoading()</div><div class="line">        webView.removeObserver(self, forKeyPath: &quot;scrollView.contentSize&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><h5 id="loading-方法"><a href="#loading-方法" class="headerlink" title="loading 方法"></a>loading 方法</h5></li>
+</ol>
+<p>同 <code>contentSize</code> 一样，我们也可以使用更高效的 <code>loading</code> 来进行监控，该属性用于表达 WebView 的加载状态， Apple 文档中对 <code>isLoading</code> 属性的描述如下：</p>
+<blockquote>
+<p>A Boolean value indicating whether the view is currently loading content.</p>
+<p> @discussion @link WKWebView @/link is key-value observing (KVO) compliant  for this property.</p>
+</blockquote>
+<p>修改后的代码，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">fileprivate lazy var webView: WKWebView = &#123;</div><div class="line">        let config = WKWebViewConfiguration()</div><div class="line">        let web    = WKWebView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: 100), configuration: config)</div><div class="line">        web.navigationDelegate = self</div><div class="line">        web.scrollView.isScrollEnabled = false</div><div class="line">        web.translatesAutoresizingMaskIntoConstraints = false</div><div class="line">        // 监听 webView 加载的动作</div><div class="line">        web.addObserver(self, forKeyPath: &quot;loading&quot;, options: .new, context: nil)</div><div class="line">        return web</div><div class="line">    &#125;()</div><div class="line">    </div><div class="line">    /// 监听 scrollView.contentSize &amp; loading</div><div class="line">override func observeValue(forKeyPath keyPath: String?, </div><div class="line">						   of object: Any?, </div><div class="line">						   change: [NSKeyValueChangeKey : Any]?, </div><div class="line">						   context: UnsafeMutableRawPointer?) &#123;</div><div class="line">						   </div><div class="line">        if keyPath == &quot;loading&quot;&#123;</div><div class="line">            webView.evaluateJavaScript(&quot;document.body.scrollHeight&quot;) </div><div class="line">            &#123; (heightValue, error) in</div><div class="line">                guard let height = heightValue as? CGFloat else &#123; return &#125;</div><div class="line">                print(&quot;Web loading Height: \(height)&quot;)</div><div class="line">                self.heightAction?(height)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    deinit &#123;</div><div class="line">        webView.stopLoading()</div><div class="line">        webView.removeObserver(self, forKeyPath: &quot;loading&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>通过打印这两个观察者属性的调用动作，可以发现 contentSize 比 loading 调用的次数多，且在滚动 TableView 的时候 contentSize 是随即更新无论是否真有变化，而 loading 自加载完成后不再调用，两者计算的高度值一样。</p>
+<p>如果使用观察者模式的话，建议选用 <code>loading</code> 模式：</p>
+<p>其一 监听加载的动作更符合<strong>渲染状态发生</strong>这一事实；</p>
+<p>其二 如果被认定为已加载完成 contentSize 就不会再变，无需持续观察。</p>
+<p>虽然网络稍好的时候用以上方法均可以实现获取文档的正确高度，但一旦网络极差的情况下上面的方式都失效了。</p>
+<p>请参考<a href="">Demo</a>中「观察者模式」commit 节点。</p>
+<h4 id="JS-监听："><a href="#JS-监听：" class="headerlink" title="* JS 监听："></a>* JS 监听：</h4><p>记得上周五下班回家在地铁上开开心心等待第二天的 ChinaJoy，拿起小手机看看资讯消息，然后一条老板的微信消息@me，老板给我截了图~某详情页展示不全。虽然对这个问题熟悉得不能再熟悉也清楚要做什么，但还是为之一怔，因为和老板交流的不多（有时候他看着我，但目光已经透过了我到达后面的同事），为了不打破被老板忽略的角落形象，决定好好想想策略。</p>
+<blockquote>
+<p>类型：大量图文混排</p>
+<p>参考：《它们一边鄙视，一边用自己的方式照顾我们》单元</p>
+</blockquote>
+<p>经过了之前的技术探索，觉得从 WebView 中找到监察 HTML 页面渲染完成的状态并不可靠，如果 HTML能够主动发送消息给我就好了。</p>
+<p>按照这种想法，搜索了 「HTML 加载完成事件、HTML 图片懒加载完成事件……」，最终查到，在 HTML DOM 中 Event 有个函数 <a href="http://www.w3school.com.cn/jsref/event_onload.asp" target="_blank" rel="external">onload</a> 是用于<strong>一张页面或一幅图像完成加载</strong>时所执行的，我们需要监听所有的 <code>img</code>标签 或 <code>body</code>标签，然后在这个方法里发个消息给 WebKit 然后进行拦截即可。</p>
+<p>接下来我们要做两件事：</p>
+<ol>
+<li>在 WebView 里注册一个方法，用以接收 HTML DOM 的事件；</li>
+<li>在 HTML 里补充 JS 脚本，用以发送消息给 WebView ；</li>
+</ol>
+<h5 id="1-在-WebView-里注册一个方法"><a href="#1-在-WebView-里注册一个方法" class="headerlink" title="1. 在 WebView 里注册一个方法"></a>1. 在 WebView 里注册一个方法</h5><blockquote>
+<ol>
+<li>配置 WKWebViewConfiguration ，为其注册一个 ScriptMessageHandler ；</li>
+<li>实现 WKScriptMessageHandler 代理方法，拦截 你所注册的 ScriptMessageHandler；</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">fileprivate lazy var webView: WKWebView = &#123;</div><div class="line">        let config = WKWebViewConfiguration()</div><div class="line">            config.preferences.javaScriptEnabled = true</div><div class="line">            // 在此注册 JS 发送对象的函数名</div><div class="line">            config.userContentController.add(self, name: &quot;imagLoaded&quot;)</div><div class="line">        let web    = WKWebView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: 100), configuration: config)</div><div class="line">        web.navigationDelegate = self</div><div class="line">        web.scrollView.isScrollEnabled = false</div><div class="line">        web.translatesAutoresizingMaskIntoConstraints = false</div><div class="line">        return web</div><div class="line">&#125;()</div><div class="line"></div><div class="line"></div><div class="line">func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) &#123;</div><div class="line">        if message.name == &quot;imagLoaded&quot;, let height = message.body as? CGFloat &#123;</div><div class="line">            heightAction?(height)</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2-添加以下-JS-代码在-lt-body-gt-标签之后"><a href="#2-添加以下-JS-代码在-lt-body-gt-标签之后" class="headerlink" title="2. 添加以下 JS 代码在 \&lt;/ body&gt; 标签之后"></a>2. 添加以下 JS 代码在 \&lt;/ body&gt; 标签之后</h5><blockquote>
+<ol>
+<li>使用 <code>document.getElementsByTagName(&#39;img&#39;)</code> 会获取 DOM 目录下所有的 img 标签；</li>
+<li>使用 <code>window.webkit.messageHandlers.&lt;你所注册的方法名&gt;.postMessage(&#39;数据消息&#39;)</code> 给 webkit 发送消息；</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    </div><div class="line">    let imgArr = document.getElementsByTagName(&apos;img&apos;);</div><div class="line">    for (var i = 0; i &lt;= imgArr.length - 1; i++) &#123;</div><div class="line">        (imgArr[i]).onload = function() &#123; // 加载完成后给 webkit 发送通知</div><div class="line">            let height = document.body.scrollHeight;</div><div class="line">            window.webkit.messageHandlers.imagLoaded.postMessage(height);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>本文仅作为实际工程的应用，不涉及任何知识体系，想了解更多，请查看 <a href="https://github.com/WebKit/webkit" target="_blank" rel="external">WebKit</a> 的开源代码 ╮(╯_╰)╭。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;此文读者：iOS 开发者&lt;/li&gt;
+&lt;li&gt;此文深度：粗浅&lt;/li&gt;
+&lt;li&gt;此文目的：解决 TableView 嵌套 WKWebView 高度问题&lt;/li&gt;
+&lt;li&gt;环境配置：Xcode10.0  &amp;amp;  macOS10.13.6  &amp;amp;   弱网
+    
+    </summary>
+    
+      <category term="技术栈" scheme="http://yinzhen.tech/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/"/>
+    
+    
+      <category term="Swift" scheme="http://yinzhen.tech/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://yinzhen.tech/tags/iOS/"/>
+    
+      <category term="WebView" scheme="http://yinzhen.tech/tags/WebView/"/>
+    
+      <category term="JS" scheme="http://yinzhen.tech/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS制作依赖Cocoapods且OC与Swift混编的framework</title>
     <link href="http://yinzhen.tech/2017/10/06/iOS%E5%88%B6%E4%BD%9C%E4%BE%9D%E8%B5%96Cocoapods%E4%BE%9D%E8%B5%96-OC%E4%B8%8ESwift%E6%B7%B7%E7%BC%96%E7%9A%84framework/"/>
     <id>http://yinzhen.tech/2017/10/06/iOS制作依赖Cocoapods依赖-OC与Swift混编的framework/</id>
     <published>2017-10-06T04:46:26.000Z</published>
-    <updated>2017-10-17T03:32:05.080Z</updated>
+    <updated>2017-10-17T03:32:05.081Z</updated>
     
     <content type="html"><![CDATA[<h4 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h4><p>刚进公司，翻看以前的工程项目，项目没有按照一定的组织计划和标准进行构建。并且，直接在项目上进行重构会有很大的<strong>阻力</strong>和<strong>风险</strong>。领导层也知道相关问题的存在，如果项目还是以现在的方式继续进行代码堆叠，势必将来会更加难以接手和维护，所以重新进行两个工程项目的重写得到支持。</p>
 <h4 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h4><p>虽然已经确定对两个项目进行重写，但是业务方面也停下来是挺<strong>危险</strong>的一件事情，毕竟我们是因为架构的优化而重新写了一遍。我原计划的是，自己先编写基础公共的模块，其他两位开发人员继续业务代码上的开发。等到我这边工作完成的时候，他们可以很快切入进来，并且也不耽误现有的需求计划。不过鉴于领导层的鼎力支持，好吧~项目的优化成为了当前工作的重中之重，然后自己作为实践人，肩上也少不了压力。</p>
